@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-IC:/boost -Wall
+CXXFLAGS=
 SRC=aiostream.cpp main.cpp
 OBJ=$(SRC:.cpp=.o)
 
