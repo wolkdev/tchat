@@ -1,0 +1,3 @@
+[submodule "gxxnet"]
+	path = gxxnet
+	url = https://github.com/wolkdev/gxxnet
