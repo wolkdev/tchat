@@ -5,18 +5,24 @@
 #include <thread>
 #include <vector>
 
+int x_pos_;
+
 void server()
 {
     char buffer[500];
     char message[] = "hello world";
     size_t size;
 
-    Socket socket(Socket::PROTOCOL::TCP);
+    Socket socket(Socket::TRANSMISSION_PROTOCOL::TCP);
     socket.Bind(8080);
     socket.Listen();
-    Socket* client = socket.Accep();
-    client->Send(message, sizeof(message), size);
-    client->Receive(buffer, sizeof(buffer), size);
+
+    Socket client;
+    socket.Accep(client);
+
+    client.Send(message, sizeof(message), size);
+    client.Receive(buffer, sizeof(buffer), size);
+
     std::cout << buffer << std::endl;
 }
 
@@ -26,10 +32,13 @@ void client(std::string _ip)
     char message[] = "hello my friend !";
     size_t size;
 
-    Socket socket(Socket::PROTOCOL::TCP);
+    Socket socket(Socket::TRANSMISSION_PROTOCOL::TCP);
     socket.Connect(_ip, 8080);
+
     socket.Receive(buffer, sizeof(buffer), size);
+
     std::cout << buffer << std::endl;
+
     socket.Send(message, sizeof(message), size);
 }
 
